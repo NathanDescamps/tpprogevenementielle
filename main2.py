@@ -2,8 +2,6 @@ import time
 import concurrent.futures
 import requests
 
-if __name__ == 'main':
-
     img_urls = [
         'https://cdn.pixabay.com/photo/2022/10/31/18/44/spider-web-7560535_960_720.jpg'
     ]
@@ -15,6 +13,7 @@ if __name__ == 'main':
             img_file.write(img_bytes)
             print(f"{img_name} was downloaded")
 
+if __name__ == 'main':
     start = time.perf_counter()
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
