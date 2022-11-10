@@ -1,8 +1,6 @@
 import threading
 import time
 
-if __name__ == 'main':
-
     def task(i):
         print(f"Task {i} starts for {i+1} second(s)")
         time.sleep(i+1)
@@ -10,6 +8,7 @@ if __name__ == 'main':
 
     start = time.perf_counter()
 
+if __name__ == 'main':
     T = []
     for i in range(100):
         T.append(threading.Thread(target=task, args=[i]))
