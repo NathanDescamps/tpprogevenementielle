@@ -1,7 +1,7 @@
 import threading
 import time
 
-if __name__ == 'main1':
+if __name__ == 'main':
 
     def task(i):
         print(f"Task {i} starts for {i+1} second(s)")
