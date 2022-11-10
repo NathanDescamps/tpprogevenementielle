@@ -8,7 +8,7 @@ import time
 
     start = time.perf_counter()
 
-if __name__ == 'main':
+if __name__ == '__main__':
     T = []
     for i in range(100):
         T.append(threading.Thread(target=task, args=[i]))
