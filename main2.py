@@ -13,7 +13,7 @@ import requests
             img_file.write(img_bytes)
             print(f"{img_name} was downloaded")
 
-if __name__ == 'main':
+if __name__ == '__main__':
     start = time.perf_counter()
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
