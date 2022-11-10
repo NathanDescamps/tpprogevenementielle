@@ -5,7 +5,7 @@ import requests
 if __name__ == 'main':
 
     img_urls = [
-        'https: // cdn.pixabay.com / photo / 2022 / 10 / 31 / 18 / 44 / spider - web - 7560535_960_720.jpg'
+        'https://cdn.pixabay.com/photo/2022/10/31/18/44/spider-web-7560535_960_720.jpg'
     ]
 
     def download_image(img_url):
