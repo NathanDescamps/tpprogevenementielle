@@ -1,0 +1,21 @@
+import socket
+
+host = socket.gethostname()
+port = 5001
+
+def client_program():
+    host = socket.gethostname()
+    port = 5000
+    client = socket.socket()
+    client.connect((host, port))
+    msgcl = ""
+    msgsrv = ""
+    while msgcl != "bye" and msgsrv != "bye" and msgcl != "arret" and msgsrv != "arret":
+        msgcl = input(" aezaeaze : ")
+        client.send(msgcl.encode())
+        msgsrv = client.recv(1024).decode()
+        print(msgsrv)
+    client.close()
+
+if __name__ == '__main__':
+    client_program()
