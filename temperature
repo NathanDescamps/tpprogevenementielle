@@ -1,0 +1,67 @@
+import sys
+from PyQt5.QtWidgets import *
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        widget = QWidget()
+        self.setCentralWidget(widget)
+
+        grid = QGridLayout()
+        widget.setLayout(grid)
+
+        self.__choix = QComboBox()
+        self.__choix.addItem('K => C')
+        self.__choix.addItem('C => K')
+        self.__lab = QLabel("")
+        self.__lab2 = QLabel("")
+        self.__lab3 = QLabel("")
+        self.__lab4 = QLabel("Conversion")
+        self.__lab5 = QLabel("Température")
+        self.__text = QLineEdit("")
+        conv = QPushButton("Convertir")
+        aide = QPushButton("?")
+
+
+        grid.addWidget(self.__lab5, 0, 0)
+        grid.addWidget(self.__text, 0, 1)
+        grid.addWidget(self.__lab, 0, 2)
+        grid.addWidget(conv, 1, 1)
+        grid.addWidget(self.__choix, 1, 2)
+        grid.addWidget(self.__lab4, 3, 0)
+        grid.addWidget(self.__lab3, 3, 1)
+        grid.addWidget(self.__lab2, 3, 2)
+        grid.addWidget(aide, 4, 3)
+
+        conv.clicked.connect(self._actionOk)
+        self.__choix.activated.connect(self._combobox)
+        aide.clicked.connect(self._help)
+
+    def _combobox(self):
+        if self.__choix.currentText() == "K => C":
+            self.__lab.setText('°K')
+            self.__lab2.setText('°C')
+        else:
+            self.__lab.setText('°C')
+            self.__lab2.setText('°K')
+
+    def _actionOk(self):
+        if self.__choix.currentText() == 'K => C':
+            x = float(self.__text.text()) - 273.15
+            self.__lab3.setText(str(x))
+        else :
+            x = float(self.__text.text()) + 273.15
+            self.__lab3.setText(str(x))
+
+    def _help(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Aide")
+        msg.setText("petit programme de conversion de températures!")
+        msg.exec_()
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    app.exec()
