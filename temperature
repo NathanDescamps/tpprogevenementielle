@@ -47,12 +47,18 @@ class MainWindow(QMainWindow):
             self.__lab2.setText('°K')
 
     def _actionOk(self):
-        if self.__choix.currentText() == 'K => C':
-            x = float(self.__text.text()) - 273.15
-            self.__lab3.setText(str(x))
-        else :
-            x = float(self.__text.text()) + 273.15
-            self.__lab3.setText(str(x))
+        try:
+            if self.__choix.currentText() == 'K => C':
+                x = float(self.__text.text()) - 273.15
+                self.__lab3.setText(str(x))
+            else :
+                x = float(self.__text.text()) + 273.15
+                self.__lab3.setText(str(x))
+        except ValueError:
+            msg2 = QMessageBox()
+            msg2.setWindowTitle('erreur')
+            msg2.setText('Entrez une valeur valide')
+            msg2.exec_()
 
     def _help(self):
         msg = QMessageBox()
