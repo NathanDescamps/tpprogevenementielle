@@ -1,0 +1,74 @@
+import socket
+import sys
+from PyQt5.QtWidgets import *
+
+host = "localhost"
+port = 10000
+
+def client_program():
+    host = "localhost"
+    port = 10000
+    client = socket.socket()
+    client.connect((host, port))
+    msgcl = ""
+    msgsrv = ""
+    while msgcl != "bye" and msgsrv != "bye" and msgcl != "arret" and msgsrv != "arret":
+        msgcl = input(" client : ")
+        client.send(msgcl.encode())
+        msgsrv = client.recv(1024).decode()
+        print(msgsrv)
+    client.close()
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        widget = QWidget()
+        self.setCentralWidget(widget)
+
+        grid = QGridLayout()
+        widget.setLayout(grid)
+
+        self.__lab = QLabel("")
+        self.__lab5 = QLabel("Serveur")
+        self.__text = QLineEdit("")
+        self.__lab51 = QLabel("Port")
+        self.__text1 = QLineEdit("")
+        aide = QPushButton("Connexion")
+        self.__lab6 = QLabel("Message :")
+        self.__text2 = QLineEdit("")
+        envoie = QPushButton("envoyer")
+        efface = QPushButton("Effacer")
+        quitte = QPushButton("Quitter")
+
+
+        grid.addWidget(self.__lab5, 0, 0)
+        grid.addWidget(self.__text, 0, 1)
+        grid.addWidget(self.__lab51, 1, 0)
+        grid.addWidget(self.__text1, 1, 1)
+        grid.addWidget(self.__lab, 0, 2)
+        grid.addWidget(self.__lab6,4,0)
+        grid.addWidget(aide, 2, 0)
+        grid.addWidget(self.__text2,4, 1)
+        grid.addWidget(envoie, 5,0)
+        grid.addWidget(efface, 6, 0)
+        grid.addWidget(quitte, 6, 1)
+
+        quitte.clicked.connect(self.__actionQuitter)
+
+    def __actionQuitter(self):
+        msgcl = "deco-server"
+        client.send(msgcl.encode())
+
+    def __actionConnexion(self):
+        if self.__text == "localhost" and self.__text1 == 10000:
+            client = socket.socket()
+            client.connect((localhost, 10000))
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    app.exec()
+
+#lien repository git 
