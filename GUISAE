@@ -1,0 +1,60 @@
+import sys
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import QDir
+
+class SAEinterface(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        widget = QWidget()
+        grid = QGridLayout()
+
+        self.setCentralWidget(widget)
+        widget.setLayout(grid)
+
+        connexion = QPushButton("Connexion")
+        deconnexion = QPushButton("déonnexion")
+        self.__lescommandes = QComboBox()
+        self.__lescommandes.addItems(['infcpu', 'info sur la ram', 'infexploitation', 'infaddresseip'])
+        self.__port = QLabel("Port :")
+        self.__port1 = QLineEdit("10015")
+        self.__ip = QLabel("Adresse IP :")
+        self.__ip1 = QLineEdit("")
+        self.__choisirfichiertxt = QPushButton('choisir un ichier avec vos IP')
+        self.__choisirfichiertxt.clicked.connect(self.get_text_file)
+        self.lesip = QTextEdit()
+
+
+        grid.addWidget(connexion, 2, 0, 1, 1)
+        grid.addWidget(deconnexion,2 , 1, 1 ,1)
+        grid.addWidget(self.__lescommandes, 3, 0, 1, 3)
+        grid.addWidget(self.__port, 1 ,0 )
+        grid.addWidget(self.__port1, 1 ,1, 1, 2 )
+        grid.addWidget(self.__ip, 0 ,0 )
+        grid.addWidget(self.__ip1, 0, 1, 1, 2)
+        grid.addWidget(self.__choisirfichiertxt, 4, 0, 1,3 )
+        grid.addWidget(self.lesip, 5, 0, 1, 3)
+
+    def get_text_file(self, table):
+        dialog = QFileDialog()
+        dialog.setFileMode(QFileDialog.AnyFile)
+        dialog.setFilter(QDir.Files)
+
+        if dialog.exec_():
+            file_name = dialog.selectedFiles()
+
+            if file_name[0].endswith('.txt'):
+                with open(file_name[0], 'r') as f:
+                    donnes = f.read()
+                    self.lesip.setPlainText(donnes)
+                    f.close()
+            else:
+                pass
+
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = SAEinterface()
+    window.show()
+    app.exec()
