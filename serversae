@@ -35,9 +35,13 @@ def serveur():
                         systemexploit = os.name
                         msg = (f'Le système utilisé est {systemexploit}')
                     elif msg == "infaddresseip":
-
-
-
+                        print(f"laddresse ip de cette machine est {socket.gethostbyname(socket.gethostname())}")
+                    elif msg == "infram":
+                        pid = os.getpid()
+                        python_process = psutil.Process(pid)
+                        memoryUse = python_process.memory_info()[0]/2.**30
+                        mmoirevirtu2 = (psutil.virtual_memory()[3]/2.**30)
+                        print(f"la RAM utilisé vaut : {memoryUse} GB et la ram totale vaut : {mmoirevirtu2} GB.")
                     conn.send(msg.encode())
             conn.close()
         print ("Connexion avec le client terminé !")
