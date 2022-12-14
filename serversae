@@ -1,4 +1,6 @@
 import socket
+import psutil
+import os
 
 def serveur():
     msg = ""
@@ -24,11 +26,23 @@ def serveur():
                 while msg != "kill" and msg != "reset" and msg != "disconnect":
                     msg = conn.recv(1024).decode()
                     print ("Received from client: ", msg)
+                    if msg == "infcpu":
+                        nombrecpu = os.cpu_count()
+                        cpupourcentage = psutil.cpu_percent()
+                        cpustatistiques = psutil.cpu_stats()
+                        msg = (f'Il y a {nombrecpu}, utilisé pour {cpupourcentage}, et les stats sont {cpustatistiques}')
+                    elif msg == "infexploitation":
+                        systemexploit = os.name
+                        msg = (f'Le système utilisé est {systemexploit}')
+                    elif msg == "infaddresseip":
+
+
+
                     conn.send(msg.encode())
-                conn.close()
-        print ("Connection closed")
+            conn.close()
+        print ("Connexion avec le client terminé !")
         server_socket.close()
-        print ("Server closed")
+        print ("Serveur s'est éteint avec succès !")
 
 if __name__ == '__main__':
     serveur()
