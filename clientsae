@@ -19,6 +19,8 @@ class Client(threading.Thread):
         else :
             print ("connexion réalisée")
             return 0
+
+
     def __dialogue(self):
         msg = ""
         while msg != "kill" and msg != "disconnect" and msg != "reset":
@@ -27,7 +29,6 @@ class Client(threading.Thread):
             msg = self.__sock.recv(1024).decode()
             print(msg)
         self.__sock.close()
-
 
     def run(self):
         if (self.__connect() ==0):
